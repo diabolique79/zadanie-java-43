@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Main {
 
@@ -12,8 +13,6 @@ public class Main {
         File file = new File("liczby.txt");
         Scanner scan = new Scanner(file);
         Integer number;
-        Integer sum = 0;
-        int liczbaWystepien = 1;
 
         while (scan.hasNextLine()) {
             number = scan.nextInt();
@@ -22,49 +21,23 @@ public class Main {
         scan.close();
         list.sort(null);
 
-        TreeSet set = new TreeSet();
+        Map<Integer, Integer> numbers = new TreeMap<>();
 
-        set.addAll(list);
-        System.out.println(set);
 
-//        for (Object check : set){
-//
-//            for (int j = 0; j < list.size(); j++) {
-//
-//                if (check.equals(list.get(j))){
-//                   sum++;
-//                }
-//            }
-//
-//            System.out.println(check + " "+ sum);
-//
-//        }
+        for (int i = 0; i < list.size(); i++) {
+            Integer x = numbers.get(list.get(i));
+            if (x == null) {
+                numbers.put((Integer) list.get(i), 1);
+            } else numbers.put((Integer) list.get(i), x + 1);
 
-        Map<Integer, Integer> liczby = new TreeMap<>();
+        }
 
-//        for (Object s : list) {
-//
-//            if (liczby.containsKey(s)) {
-//                sum++;
-//                liczby.put((Integer) s, sum);
-//
-//            } else liczby.put((int) s, 1);
-//
-//        }
-//        System.out.println(liczby.keySet() + " dodać " + liczby.values());
-//
-//        System.out.println(liczby.entrySet());
-
-        for (Object s : list){
-
-                if(liczby.containsKey(s)){
-                    liczbaWystepien++;
-                    liczby.put((Integer) s, liczbaWystepien);
-                }
-                else liczby.put((Integer) s, 1);
-        }System.out.println(liczby.entrySet());
-
+        Set<Entry<Integer,Integer>> entrySet = numbers.entrySet();
+        for(Entry<Integer, Integer> entry: entrySet) {
+            System.out.println(entry.getKey() + " liczba wystąpień : " + entry.getValue());
     }
-}
+
+}}
+
 
 
